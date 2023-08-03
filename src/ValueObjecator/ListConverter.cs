@@ -76,9 +76,20 @@ namespace ValueObjecator
             return sb.ToString();
         }
 
+        public static string CapitalizeFirstLetter(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            string firstLetter = input[0].ToString().ToUpper();
+            string restOfWord = input.Substring(1);
+
+            return firstLetter + restOfWord;
+        }
+
         private static string WriteProperty(string className, string input)
         {
-            return $"public static {className} {input.Replace("_", "")} => ({className}){input};";
+            return $"public static {className} {CapitalizeFirstLetter(input.Replace("_", ""))} => ({className}){input};";
         }
 
         static string CapText(Match m)
@@ -94,9 +105,20 @@ namespace ValueObjecator
             return x;
         }
 
+        public static string LowercaseFirstLetter(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            string firstLetter = input[0].ToString().ToLower();
+            string restOfWord = input.Substring(1);
+
+            return firstLetter + restOfWord;
+        }
+
         private static string CamelcaseName(ref string input)
         {
-            return WhitespaceUppercaseRegex.Replace(input.Replace('_',' '), new MatchEvaluator(CapText)).Replace(" ", "");
+            return LowercaseFirstLetter(WhitespaceUppercaseRegex.Replace(input.Replace('_',' '), new MatchEvaluator(CapText)).Replace(" ", ""));
         }
 
         private static string WriteAttribute(string input, ref string type)
