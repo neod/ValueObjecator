@@ -76,20 +76,9 @@ namespace ValueObjecator
             return sb.ToString();
         }
 
-        public static string CapitalizeFirstLetter(string input)
-        {
-            if (string.IsNullOrEmpty(input))
-                return input;
-
-            string firstLetter = input[0].ToString().ToUpper();
-            string restOfWord = input.Substring(1).ToLower();
-
-            return firstLetter + restOfWord;
-        }
-
         private static string WriteProperty(string className, string input)
         {
-            return $"public static {className} {CapitalizeFirstLetter(input.Replace("_", ""))} => ({className}){input};";
+            return $"public static {className} {input.Replace("_", "")} => ({className}){input};";
         }
 
         static string CapText(Match m)
